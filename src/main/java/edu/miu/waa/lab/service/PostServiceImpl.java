@@ -7,7 +7,6 @@ import edu.miu.waa.lab.repository.PostRepository;
 import edu.miu.waa.lab.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -54,6 +53,13 @@ public class PostServiceImpl implements PostService{
     public List<PostDto> find(long userId) {
         User u = userRepository.findById(userId).get();
         return u.getPosts().stream().map(p -> postToDto(p, u)).toList();
+    }
+
+    @Override
+    public List<PostDto> findByTitle(String title) {
+        List<Post> posts = postRepository.findPostByTitle(title);
+        // TODO: resolve author
+        return posts.stream().map(p -> postToDto(p, new User())).toList();
     }
 
     @Override

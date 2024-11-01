@@ -1,12 +1,11 @@
 package edu.miu.waa.lab.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Entity
 @Setter
@@ -18,5 +17,12 @@ public class Post {
     private long id;
     private String title;
     private String content;
-//    private String author;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "post_id")
+    private List<Comment> comments;
+
+    public void addComment(Comment comment) {
+        comments.add(comment);
+    }
 }

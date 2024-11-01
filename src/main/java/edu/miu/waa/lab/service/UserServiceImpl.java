@@ -43,6 +43,12 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public List<UserDto> findPostGt(int num) {
+        List<User> users = userRepository.findPostGt(num);
+        return users.stream().map(u -> modelMapper.map(u, UserDto.class)).toList();
+    }
+
+    @Override
     public void delete(long id) {
         userRepository.deleteById(id);
     }

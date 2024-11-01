@@ -41,4 +41,8 @@ public class UserController {
         return userService.find();
     }
 
+    @GetMapping("/filter/post-gt/{num}")
+    List<UserDto> findPostGt(@PathVariable("num") int num) {
+        return userService.findPostGt(num);
+    }
 }
