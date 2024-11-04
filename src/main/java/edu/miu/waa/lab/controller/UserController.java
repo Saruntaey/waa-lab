@@ -1,8 +1,8 @@
 package edu.miu.waa.lab.controller;
 
+import edu.miu.waa.lab.aspect.annotation.ExecutionTime;
 import edu.miu.waa.lab.entity.dto.UserDto;
 import edu.miu.waa.lab.service.UserService;
-import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +32,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
+    @ExecutionTime
     UserDto findById(@PathVariable("id") long id) {
         return userService.findById(id);
     }
