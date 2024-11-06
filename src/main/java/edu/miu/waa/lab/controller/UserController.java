@@ -1,6 +1,7 @@
 package edu.miu.waa.lab.controller;
 
 import edu.miu.waa.lab.aspect.annotation.ExecutionTime;
+import edu.miu.waa.lab.entity.Role;
 import edu.miu.waa.lab.entity.dto.UserDto;
 import edu.miu.waa.lab.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,5 +46,20 @@ public class UserController {
     @GetMapping("/filter/post-gt/{num}")
     List<UserDto> findPostGt(@PathVariable("num") int num) {
         return userService.findPostGt(num);
+    }
+
+    @PostMapping("/{id}/roles/{roleId}")
+    UserDto addRole(@PathVariable("id") long id, @PathVariable("roleId") long roleId) {
+        return userService.addRole(id, roleId);
+    }
+
+    @PostMapping("/roles")
+    Role crateRole (@RequestBody Role role) {
+        return userService.createRole(role);
+    }
+
+    @GetMapping("/roles")
+    List<Role> findRole() {
+        return userService.findRole();
     }
 }
